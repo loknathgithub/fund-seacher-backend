@@ -6,17 +6,17 @@ import User from '../models/Users.js';
 const router = Router();
 const SALT_ROUNDS = 10; // bcrypt salt rounds
 
-// Register
+
 router.post('/register', async (req, res) => {
   const { username, password } = req.body;
   try {
-    // Check if username already exists
+
     const exists = await User.findOne({ username });
     if (exists) {
       return res.status(409).json({ error: 'Username already taken' });
     }
 
-    // Hash the password
+ 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
     const user = new User({ username, password: hashedPassword });

@@ -4,7 +4,6 @@ import authenticateJWT from '../middleware/authenticateJWT.js';
 
 const router = Router();
 
-// Save a mutual fund for the logged-in user
 router.post('/save-fund', authenticateJWT, async (req, res) => {
   const { fundId } = req.body;
   if (!fundId) return res.status(400).json({ error: 'fundId required' });
@@ -20,7 +19,6 @@ router.post('/save-fund', authenticateJWT, async (req, res) => {
   }
 });
 
-// Get all saved funds for the logged-in user
 router.get('/saved-funds', authenticateJWT, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId);
